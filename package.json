@@ -4,8 +4,8 @@
   "description": "Socal network for developers",
   "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js",
+    "start": "node server.js",
+    "server": "nodemon --inspect server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
