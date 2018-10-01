@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
     @Route: POST /api/users/register
     @Desc: API to register users
     @Access: Public
-    @Params: name, email, password
+    @Params: name, email, password, phone, and avatar
 */
 router.post('/register', (req, res) => {
     // Check that all required fields are filled out
@@ -37,7 +37,7 @@ router.post('/register', (req, res) => {
     const avatar = gravatar.url(email, { s: '200', r: 'pg', d: 'mm'}); // s: Size, r: Rating, d: Default
 
     if (name && email && phone && password) {
-        User.findOne({ email: email }).then(user => {
+        User.findOne({ email }).then(user => {
             if (user) {
                 return res.status(400).json({ status: 400, msg: 'Email already exists!'});
             } else {
@@ -54,6 +54,31 @@ router.post('/register', (req, res) => {
                     });
                 });
             }
+        });
+    } else {
+        return res.status(400).json({ status: 400, msg: 'Missing argument!'});
+    }
+});
+
+
+/* 
+    @Route: POST /api/users/login
+    @Desc: API to login users and return JWT Token
+    @Access: Public
+    @Params: email, password
+*/
+router.post('/login', (req, res) => {
+    // Check that all required fields are filled out
+    const email = typeof(req.body.email) === 'string' && req.body.email.trim().length > 0 ? req.body.email.trim() : false;
+    const password = typeof(req.body.password) == 'string' && req.body.password.trim().length > 0 ? req.body.password.trim() : false;
+
+    if (email && password) {
+        User.findOne({ email }).then(user => {
+            if (!user) return res.status(400).json({ status: 400, msg: 'User not found'});
+
+            // compare password
+            bcrypt.compare(password, user.password).then();
+
         });
     } else {
         return res.status(400).json({ status: 400, msg: 'Missing argument!'});
