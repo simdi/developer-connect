@@ -7,6 +7,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('./config/default');
 const mongoose = require('mongoose');
+const passport = require('passport');
 const routes = require('./services');
 const app = express();
 const port = process.env.PORT || config.port;
@@ -25,14 +26,19 @@ mongoose.connect(db, {
 // app.configure(configuration);
 
 // Middlewares
+app.use(passport.initialize());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Passport configuration
+require('./config/passport')(passport);
+
+
+
+// Use routes
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
-
-// Use routes
 app.use('/api/users', routes.users);
 app.use('/api/profiles', routes.profiles);
 app.use('/api/posts', routes.posts);

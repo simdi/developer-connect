@@ -20,7 +20,7 @@ module.exports = {
             },
             "audience": "https://yourdomain.com",
             "subject": "anonymous",
-            "issuer": "feathers",
+            "issuer": "dev-connect",
             "algorithm": "HS256",
             "expiresIn": "1d"
         },
@@ -38,7 +38,7 @@ module.exports = {
                 },
                 "audience": "https://yourdomain.com",
                 "subject": "anonymous",
-                "issuer": "feathers",
+                "issuer": "dev-connect",
                 "algorithm": "HS256",
                 "expiresIn": "2d"
             },
