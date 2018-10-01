@@ -3,10 +3,7 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const ProfileSchema = new Schema({
-    name: {
-        type: Schema.type.String,
-        required: true
-    }
+    name: { ype: Schema.type.String, required: true }
 });
 
-module.exports = ProfileSchema;
+module.exports = Profile = mongoose.model('Profiles', ProfileSchema);
