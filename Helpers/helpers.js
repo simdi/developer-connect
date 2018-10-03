@@ -4,11 +4,7 @@
 */
 
 module.exports = Helpers = {
-    // This is going to handle all api params validation errors.
-    handleParamsError: (params) => {
-        
-    },
-    // This method is to check oi
+    // This method is to check if a field or object is empty
     isEmpty(value) {
         return(
             value === undefined ||
