@@ -102,7 +102,7 @@ router.post('/login', (req, res) => {
             });
         });
     } else {
-        return res.status(400).json({ status: 400, msg: 'Missing argument!', errors});
+        return res.status(400).json({ status: 400, msg: 'Validation Error!', errors});
     }
 });
 

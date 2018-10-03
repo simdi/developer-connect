@@ -7,6 +7,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Profile = require('../models/Profile.model');
 const User = require('../models/User.model');
+const validateProfileInput = require('../validation/profile');
 const router = express.Router();
 
 router.get('/test', (req, res) => {
@@ -45,11 +46,18 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
     @Params: none
 */
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+    // Check that all required fields are filled out
+    const { errors, isValid } = validateProfileInput(req.body);
     // Get all the fields supplied by the user
     const profileFields = {};
-    const errors = {};
     const userId = req.user.id;
     profileFields.user = userId;
+
+    // check validation
+    if (!isValid) {
+        // Return any errors with 400 status
+        return res.status(400).json({ status: 400, msg: 'Validation Error!', errors });
+    }
 
     if (req.body.handle) profileFields.handle = req.body.handle; 
     if (req.body.company) profileFields.company = req.body.company; 
@@ -84,12 +92,15 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
                 if (foundHandle) res.status(400).json({ status: 400, msg: 'TThis handle already exists', errors });
 
                 // Save Profile
-                new Profile(profileFields).then(create => {
+                new Profile(profileFields).save().then(create => {
                     res.json({ status: 200, msg: 'User profile', data: [create]});
                 }).catch(err => {
                     errors = err;
-                    res.status(404).json({ status: 404, msg: 'Error!', errors})
+                    res.status(404).json({ status: 404, msg: 'Error!', errors});
                 });
+            }).catch(err => {
+                errors = err;
+                res.status(404).json({ status: 404, msg: 'Error!', errors});
             });
         }
     }).catch(err => {
