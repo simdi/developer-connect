@@ -19,6 +19,49 @@ router.get('/test', (req, res) => {
 });
 
 /* 
+    @Route: GET /api/profile/handle/:handle
+    @Desc: API to get profile by handle
+    @Access: Public
+    @Params: none
+*/
+router.get('handle/:handle', (req, res) => {
+    const handle = req.params.handle;
+    const errors = {};
+    Profile.findOne({ handle: handle }).populate('user', ['name', 'avatar']).then(profile => {
+        errors.profile = 'There is no profile for this user';
+        if (!profile) return res.status(404).json({ status: 404, msg: 'There is no profile for this user', errors });
+
+        res.json({ status: 200, msg: 'User profile', data: [profile]});
+    }).catch(err => {
+        errors = err;
+        res.status(404).json({ status: 404, msg: 'Error!', errors});
+    });
+});
+
+
+/* 
+    @Route: GET /api/profile/user/:user_id
+    @Desc: API to get profile by user_id
+    @Access: Public
+    @Params: none
+*/
+router.get('/user/:user_id', (req, res) => {
+    console.log(req.params);
+    const userId = req.params.user_id;
+    const errors = {};
+    Profile.findOne({ user: userId }).populate('user', ['name', 'avatar']).then(profile => {
+        errors.profile = 'There is no profile for this user';
+        if (!profile) return res.status(404).json({ status: 404, msg: 'There is no profile for this user', errors });
+
+        res.json({ status: 200, msg: 'User profile', data: [profile]});
+    }).catch(err => {
+        errors = err;
+        res.status(404).json({ status: 404, msg: 'Error!', errors});
+    });
+});
+
+
+/* 
     @Route: GET /api/profile
     @Desc: API to get current user's profile
     @Access: Private
@@ -27,7 +70,7 @@ router.get('/test', (req, res) => {
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     const userId = req.user.id;
     const errors = {};
-    Profile.findOne({ user: userId }).then(profile => {
+    Profile.findOne({ user: userId }).populate('user', ['name', 'avatar']).then(profile => {
         errors.profile = 'There is no profile for this user';
         if (!profile) return res.status(404).json({ status: 404, msg: 'There is no profile for this user', errors });
 
