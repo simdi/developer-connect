@@ -27,6 +27,7 @@ const ProfileSchema = new Schema({
             school: { type: Schema.Types.String, required: true },
             degree: { type: Schema.Types.String, required: true },
             fieldOfStudy: { type: Schema.Types.String, required: true },
+            location: { type: Schema.Types.String, required: true },
             from: { type: Schema.Types.Date, required: true },
             to: { type: Schema.Types.Date, required: false },
             current: { type: Schema.Types.Boolean, required: false, default: false },
