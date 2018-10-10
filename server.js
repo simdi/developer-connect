@@ -33,11 +33,11 @@ app.use(bodyParser.json());
 // Passport configuration
 require('./config/passport')(passport);
 
-
-
 // Use routes
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    const json = { "name": "Chisimdi" };
+    debugger;
+    res.status(200).json(json);
 });
 app.use('/api/users', routes.users);
 app.use('/api/profiles', routes.profiles);
