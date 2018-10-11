@@ -22,7 +22,6 @@ router.get('/', (req, res) => {
     });
 });
 
-
 /* 
     @Route: GET /api/posts/:id
     @Desc: API to get posts
