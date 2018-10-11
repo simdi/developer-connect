@@ -6,14 +6,6 @@ const Post = require('../models/Post.model');
 const validatePostInput = require('../validation/post');
 const router = express.Router();
 
-router.get('/test', (req, res) => {
-    res.json({
-        status: 200,
-        msg: 'Good to go',
-        data: []
-    });
-});
-
 /* 
     @Route: GET /api/posts
     @Desc: API to get posts
