@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const UserSchema = new Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    phone: { type: String, require: true },
-    password: { type: String, required: true },
-    avatar: { type: String, required: false },
-    createdAt: { type: Date, default: Date.now() }
+    name: { type: Schema.Types.String, required: true },
+    email: { type: Schema.Types.String, required: true },
+    phone: { type: Schema.Types.String, require: true },
+    password: { type: Schema.Types.String, required: true },
+    avatar: { type: Schema.Types.String, required: false },
+    createdAt: { type: Schema.Types.Date, default: Date.now() }
 });
 
 module.exports = User = mongoose.model('users', UserSchema);

@@ -1,6 +1,6 @@
 module.exports = {
     "host": "https://apmisapitest.azurewebsites.net/",
-    "port": "5000",
+    "port": "6000",
     "public": "../public/",
     "paginate": {
         "default": 10,
@@ -20,7 +20,7 @@ module.exports = {
             },
             "audience": "https://yourdomain.com",
             "subject": "anonymous",
-            "issuer": "feathers",
+            "issuer": "dev-connect",
             "algorithm": "HS256",
             "expiresIn": "1d"
         },
@@ -38,7 +38,7 @@ module.exports = {
                 },
                 "audience": "https://yourdomain.com",
                 "subject": "anonymous",
-                "issuer": "feathers",
+                "issuer": "dev-connect",
                 "algorithm": "HS256",
                 "expiresIn": "2d"
             },
