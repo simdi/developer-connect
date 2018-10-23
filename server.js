@@ -36,7 +36,6 @@ require('./config/passport')(passport);
 // Use routes
 app.get('/', (req, res) => {
     const json = { "name": "Chisimdi" };
-    debugger;
     res.status(200).json(json);
 });
 app.use('/api/users', routes.users);

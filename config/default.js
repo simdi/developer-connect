@@ -1,6 +1,6 @@
 module.exports = {
     "host": "https://apmisapitest.azurewebsites.net/",
-    "port": "5000",
+    "port": "6000",
     "public": "../public/",
     "paginate": {
         "default": 10,
