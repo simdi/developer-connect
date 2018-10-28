@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authActions';
 
 class Register extends Component {
   constructor() {
@@ -14,7 +16,7 @@ class Register extends Component {
       errors: {
 
       }
-    }
+    };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -35,25 +37,14 @@ class Register extends Component {
       confirm_password: this.state.confirm_password
     }
 
-    axios.post('/api/users/register', payload).then(res => {
-      console.log('Res', res);
-    }).catch(err => {
-      console.log('Error', err.response.data.errors);
-      this.setState({ errors: err.response.data.errors });
-    });
+    this.props.registerUser(payload);
+    // axios.post('/api/users/register', payload).then(res => {
+    //   console.log('Res', res);
+    // }).catch(err => {
+    //   console.log('Error', err.response.data.errors);
+    //   this.setState({ errors: err.response.data.errors });
+    // });
   }
-
-  // async submitApI(url, payload) {
-  //   await new Promise((resolve, reject) => {
-  //     axios.post(url, payload).then(res => {
-  //       console.log('Res', res);
-  //       resolve(res);
-  //     }).catch(err => {
-  //       console.log('Error', err.response.data.errors);
-  //       resolve();
-  //     });
-  //   });
-  // }
 
   render() {
     const { errors } = this.state;
@@ -96,4 +87,4 @@ class Register extends Component {
   }
 }
 
-export default Register
+export default connect(null, { registerUser })(Register);
