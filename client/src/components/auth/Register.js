@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { registerUser } from '../../actions/authActions';
 
 class Register extends Component {
@@ -43,7 +44,7 @@ class Register extends Component {
     };
 
     // Call the dispatcher
-    this.props.registerUser(payload);
+    this.props.registerUser(payload, this.props.history);
   }
 
   render() {
@@ -93,11 +94,9 @@ Register.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) => ({
     auth: state.auth,
     errors: state.errors
-  }
-};
+});
 
-export default connect(mapStateToProps, { registerUser })(Register);
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));
