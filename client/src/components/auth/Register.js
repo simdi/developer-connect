@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authActions';
 
 class Register extends Component {
   constructor() {
@@ -11,13 +13,18 @@ class Register extends Component {
       phone: '',
       password: '',
       confirm_password: '',
-      errors: {
-
-      }
-    }
+      errors: {}
+    };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('Register component received ', nextProps);
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
 
   onChange(e) {
@@ -33,30 +40,14 @@ class Register extends Component {
       phone: this.state.phone,
       password: this.state.password,
       confirm_password: this.state.confirm_password
-    }
+    };
 
-    axios.post('/api/users/register', payload).then(res => {
-      console.log('Res', res);
-    }).catch(err => {
-      console.log('Error', err.response.data.errors);
-      this.setState({ errors: err.response.data.errors });
-    });
+    // Call the dispatcher
+    this.props.registerUser(payload);
   }
 
-  // async submitApI(url, payload) {
-  //   await new Promise((resolve, reject) => {
-  //     axios.post(url, payload).then(res => {
-  //       console.log('Res', res);
-  //       resolve(res);
-  //     }).catch(err => {
-  //       console.log('Error', err.response.data.errors);
-  //       resolve();
-  //     });
-  //   });
-  // }
-
   render() {
-    const { errors } = this.state;
+    const { errors } = this.state; 
     return (
       <div className="register">
         <div className="container">
@@ -96,4 +87,17 @@ class Register extends Component {
   }
 }
 
-export default Register
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+    errors: state.errors
+  }
+};
+
+export default connect(mapStateToProps, { registerUser })(Register);
