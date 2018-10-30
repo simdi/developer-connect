@@ -97,7 +97,8 @@ router.post('/login', (req, res) => {
                         res.status(200).json({ status: 200, msg: 'Success', token: `Bearer ${token}`});
                     });
                 } else {
-                    return res.status(400).json({ status: 400, msg: 'Password is incorrect!'});
+                    errors.email = 'Email or Password is incorrect';
+                    return res.status(400).json({ status: 400, msg: 'Email or Password is incorrect!', errors});
                 }
             });
         });
