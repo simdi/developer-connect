@@ -5,12 +5,14 @@ import store from './store';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 import setAuthToken from './utils/setAuthToken';
 import jwtDecode from 'jwt-decode';
+import { clearCurrentProfile } from './actions/profileActions';
 
 import NavBar from './components/layouts/Navbar';
 import Footer from './components/layouts/Footer';
 import Landing from './components/layouts/Landing';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import Dashboard from './components/dashboard/Dashboard';
 import './App.css';
 
 if (localStorage.jwtToken) {
@@ -25,7 +27,8 @@ if (localStorage.jwtToken) {
     if (decode.exp < currentTime) {
       // Logout user
       store.dispatch(logoutUser());
-      // TODO: Clear current user profile
+      // Clear current profile
+      store.dispatch(clearCurrentProfile);
       // Redirect to login page
       window.location.href = '/login';
     }
@@ -40,8 +43,9 @@ class App extends Component {
             <NavBar />
             <Route exact path="/" component={Landing} />
             <div className="container">
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/dashboard" component={Dashboard} />
             </div>
             <Footer />
           </div>
