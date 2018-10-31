@@ -65,7 +65,7 @@ class Register extends Component {
               <p className="lead text-center">Create your DevConnector account</p>
               <form noValidate  onSubmit={this.onSubmit}>
                 <TextFieldGroup type="text" placeholder="Name" onChange={this.onChange} value={this.state.name} name="name" error={errors.name} />
-                <TextFieldGroup type="email" placeholder="Email" onChange={this.onChange} value={this.state.email} name="email" error={errors.email} />
+                <TextFieldGroup type="email" placeholder="Email" onChange={this.onChange} value={this.state.email} name="email" error={errors.email} info="If you have a gravatar accout please use it." />
                 <TextFieldGroup type="text" placeholder="Phone Number" onChange={this.onChange} value={this.state.phone} name="phone" error={errors.phone} />
                 <TextFieldGroup type="password" placeholder="Password" onChange={this.onChange} value={this.state.password} name="password" error={errors.password} />
                 <TextFieldGroup type="password" placeholder="Password" onChange={this.onChange} value={this.state.confirm_password} name="confirm_password" error={errors.confirm_password} />
