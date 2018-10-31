@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../../actions/authActions';
+import TextFieldGroup from '../common/TextFieldGroup';
 
 class Register extends Component {
   constructor() {
@@ -63,27 +64,11 @@ class Register extends Component {
               <h1 className="display-4 text-center">Sign Up</h1>
               <p className="lead text-center">Create your DevConnector account</p>
               <form noValidate  onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <input type="text" className={classnames('form-control form-control-lg', { 'is-invalid': errors.name })} placeholder="Name" name="name" value={this.state.name} onChange={this.onChange}/>
-                  { errors.name && (<div className="invalid-feedback">{errors.name}</div>) }
-                </div>
-                <div className="form-group">
-                  <input type="email" className={classnames('form-control form-control-lg', { 'is-invalid': errors.email })} placeholder="Email Address" name="email" value={this.state.email} onChange={this.onChange}/>
-                  <small className="form-text text-muted">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
-                  { errors.email && (<div className="invalid-feedback">{errors.email}</div>) }
-                </div>
-                <div className="form-group">
-                  <input type="text" className={classnames('form-control form-control-lg', { 'is-invalid': errors.phone })} placeholder="Phone number" name="phone" value={this.state.phone} onChange={this.onChange}/>
-                  { errors.phone && (<div className="invalid-feedback">{errors.phone}</div>) }
-                </div>
-                <div className="form-group">
-                  <input type="password" className={classnames('form-control form-control-lg', { 'is-invalid': errors.password })} placeholder="Password" value={this.state.password} onChange={this.onChange} name="password"/>
-                  { errors.password && (<div className="invalid-feedback">{errors.password}</div>) }
-                </div>
-                <div className="form-group">
-                  <input type="password" className={classnames('form-control form-control-lg', { 'is-invalid': errors.confirm_password })} placeholder="Confirm Password" name="confirm_password" value={this.state.password2} onChange={this.onChange}/>
-                  { errors.confirm_password && (<div className="invalid-feedback">{errors.confirm_password}</div>) }
-                </div>
+                <TextFieldGroup type="text" placeholder="Name" onChange={this.onChange} value={this.state.name} name="name" error={errors.name} />
+                <TextFieldGroup type="email" placeholder="Email" onChange={this.onChange} value={this.state.email} name="email" error={errors.email} />
+                <TextFieldGroup type="text" placeholder="Phone Number" onChange={this.onChange} value={this.state.phone} name="phone" error={errors.phone} />
+                <TextFieldGroup type="password" placeholder="Password" onChange={this.onChange} value={this.state.password} name="password" error={errors.password} />
+                <TextFieldGroup type="password" placeholder="Password" onChange={this.onChange} value={this.state.confirm_password} name="confirm_password" error={errors.confirm_password} />
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
