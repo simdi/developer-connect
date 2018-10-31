@@ -3,7 +3,6 @@ import { loginUser } from '../../actions/authActions';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import classnames from 'classnames';
 import TextFieldGroup from '../common/TextFieldGroup';
 
 class Login extends Component {
