@@ -20,9 +20,10 @@ class Dashboard extends Component {
     if (profile === null || loading) {
       dashboardContent = <Spinner />
     } else {
+      console.log('Profile', profile);
       // Check if user has profile
       if (Object.keys(profile).length > 0) {
-        dashboardContent = <h1>Hello</h1>
+        dashboardContent = (<p className="lead text-muted">Welcome { user.name }</p>)
       } else {
         dashboardContent = (
           <div>
