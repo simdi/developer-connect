@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
+import { Link } from 'react-router-dom';
 
 import { getCurrentProfile } from '../../actions/profileActions';
 
@@ -19,13 +20,16 @@ class Dashboard extends Component {
     if (profile === null || loading) {
       dashboardContent = <Spinner />
     } else {
+      console.log('Profile', profile);
       // Check if user has profile
       if (Object.keys(profile).length > 0) {
-        dashboardContent = <h1>Hello</h1>
+        dashboardContent = (<p className="lead text-muted">Welcome { user.name }</p>)
       } else {
         dashboardContent = (
           <div>
             <p className="lead text-muted">Welcome { user.name }</p>
+            <p>You have not setup a profile, Please use the button below to setup a profile.</p>
+            <Link to="create-profile" className="btn btn-lg btn-info">Create Profile</Link>
           </div>
         );
       }
