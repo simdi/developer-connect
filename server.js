@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
     res.status(200).json(json);
 });
 app.use('/api/users', routes.users);
-app.use('/api/profiles', routes.profiles);
+app.use('/api/profile', routes.profiles);
 app.use('/api/posts', routes.posts);
 
 app.listen(port, _ => {
