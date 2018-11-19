@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
+import ProfileActions from './profileActions';
 
 import { getCurrentProfile } from '../../actions/profileActions';
 
@@ -23,7 +24,12 @@ class Dashboard extends Component {
       console.log('Profile', profile);
       // Check if user has profile
       if (Object.keys(profile).length > 0) {
-        dashboardContent = (<p className="lead text-muted">Welcome { user.name }</p>)
+        dashboardContent = (
+          <div>
+            <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{ user.name }</Link></p>
+            <ProfileActions />
+          </div>
+        );
       } else {
         dashboardContent = (
           <div>
