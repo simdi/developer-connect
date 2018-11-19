@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
+import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import ProfileActions from './profileActions';
 import Education from './Education';
@@ -83,4 +84,4 @@ const mapStateTopProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateTopProps, { getCurrentProfile, deleteAccount })(Dashboard); 
+export default connect(mapStateTopProps, { getCurrentProfile, deleteAccount })(withRouter(Dashboard)); 
