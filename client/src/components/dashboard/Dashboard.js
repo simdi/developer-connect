@@ -4,12 +4,18 @@ import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
 import ProfileActions from './profileActions';
+import Education from './Education';
+import Experience from './Experience';
 
-import { getCurrentProfile } from '../../actions/profileActions';
+import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
+  }
+
+  onDeleteClick() {
+    this.props.deleteAccount();
   }
 
   render() {
@@ -28,6 +34,15 @@ class Dashboard extends Component {
           <div>
             <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{ user.name }</Link></p>
             <ProfileActions />
+            <Experience experience={profile.experience} />
+            <Education education={profile.education} />
+            <div style={{ marginBottom: '60px' }} />
+            <button
+              onClick={this.onDeleteClick.bind(this)}
+              className="btn btn-danger"
+            >
+              Delete My Account
+            </button>
           </div>
         );
       } else {
@@ -58,6 +73,7 @@ class Dashboard extends Component {
 
 Dashboard.proptypes = {
     getCurrentProfile: PropTypes.func.isRequired,
+    deleteAccount: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired
 }
@@ -67,4 +83,4 @@ const mapStateTopProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateTopProps, { getCurrentProfile })(Dashboard); 
+export default connect(mapStateTopProps, { getCurrentProfile, deleteAccount })(Dashboard); 
