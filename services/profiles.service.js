@@ -13,12 +13,12 @@ const validateEducationInput = require('../validation/education');
 const router = express.Router();
 
 /* 
-    @Route: GET /api/profile/handle/:handle
+    @Route: GET /api/profile/:handle
     @Desc: API to get profile by handle
     @Access: Public
     @Params: none
 */
-router.get('handle/:handle', (req, res) => {
+router.get('/:handle', (req, res) => {
     const handle = req.params.handle;
     let errors = {};
     Profile.findOne({ handle: handle }).populate('user', ['name', 'avatar']).then(profile => {
