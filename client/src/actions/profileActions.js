@@ -5,13 +5,11 @@ import { GET_PROFILE, GET_PROFILES, GET_ERRORS, SET_CURRENT_USER, PROFILE_LOADIN
 export const getCurrentProfile = () => dispatch => {
     dispatch(setProfileLoading());
     axios.get('/api/profile').then(res => {
-        console.log('Res', res);
         dispatch({
             type: GET_PROFILE,
             payload: (res.data.data.length > 0) ? res.data.data[0] : {}
         });
     }).catch(err => {
-        console.log('Error', err);
         dispatch({
             type: GET_PROFILE,
             payload: {}
