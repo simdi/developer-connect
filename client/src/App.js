@@ -5,7 +5,7 @@ import store from './store';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 import setAuthToken from './utils/setAuthToken';
 import jwtDecode from 'jwt-decode';
-import { clearCurrentProfile } from './actions/profileActions';
+import { clearCurrentProfile, addExperience } from './actions/profileActions';
 
 import NavBar from './components/layouts/Navbar';
 import Footer from './components/layouts/Footer';
@@ -15,6 +15,8 @@ import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
 import EditProfile from './components/edit-profile/EditProfile';
 import CreateProfile from './components/create-profile/CreateProfile';
+import AddExperience from './components/add-credentials/AddExperience';
+import AddEducation from './components/add-credentials/AddEducation';
 import PrivateRoute from './components/common/PrivateRoute';
 import './App.css';
 
@@ -59,6 +61,12 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/profile/:id" component={EditProfile} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/add-experience" component={AddExperience} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/add-education" component={AddEducation} />
               </Switch>
             </div>
             <Footer />

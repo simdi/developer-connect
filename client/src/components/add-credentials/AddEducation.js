@@ -12,10 +12,11 @@ class AddEducation extends Component {
     this.state = {
       school: '',
       degree: '',
-      fieldofstudy: '',
+      fieldOfStudy: '',
       from: '',
       to: '',
       current: false,
+      location: '',
       description: '',
       errors: {},
       disabled: false
@@ -38,10 +39,11 @@ class AddEducation extends Component {
     const eduData = {
       school: this.state.school,
       degree: this.state.degree,
-      fieldofstudy: this.state.fieldofstudy,
+      fieldOfStudy: this.state.fieldOfStudy,
       from: this.state.from,
       to: this.state.to,
       current: this.state.current,
+      location: this.state.location,
       description: this.state.description
     };
 
@@ -90,10 +92,10 @@ class AddEducation extends Component {
                   error={errors.degree} />
                 <TextFieldGroup
                   placeholder="* Field of Study"
-                  name="fieldofstudy"
-                  value={this.state.fieldofstudy}
+                  name="fieldOfStudy"
+                  value={this.state.fieldOfStudy}
                   onChange={this.onChange}
-                  error={errors.fieldofstudy} />
+                  error={errors.fieldOfStudy} />
                 <h6>From Date</h6>
                 <TextFieldGroup
                   name="from"
@@ -122,6 +124,12 @@ class AddEducation extends Component {
                     Current Job
                   </label>
                 </div>
+                <TextFieldGroup
+                  placeholder="* Location"
+                  name="location"
+                  value={this.state.location}
+                  onChange={this.onChange}
+                  error={errors.location} />
                 <TextAreaFieldGroup
                   placeholder="Program Description"
                   name="description"

@@ -79,7 +79,7 @@ export const getProfileByHandle = handle => dispatch => {
     axios.delete(`/api/profile/experience/${id}`).then(res => {
         dispatch({
           type: GET_PROFILE,
-          payload: res.data
+          payload: (res.data.data.length > 0) ? res.data.data[0] : {}
         });
     }).catch(err => {
         dispatch({
@@ -94,7 +94,7 @@ export const getProfileByHandle = handle => dispatch => {
     axios.delete(`/api/profile/education/${id}`).then(res => {
         dispatch({
           type: GET_PROFILE,
-          payload: res.data
+          payload: (res.data.data.length > 0) ? res.data.data[0] : {}
         })
     }).catch(err => {
         dispatch({
@@ -111,7 +111,7 @@ export const getProfileByHandle = handle => dispatch => {
         console.log('Get Profiles', res);
         dispatch({
           type: GET_PROFILES,
-          payload: res.data
+          payload: res.data.data
         })
     }).catch(err => {
         console.log('Error', err.response.data.errors);
