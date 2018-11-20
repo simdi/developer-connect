@@ -37,10 +37,8 @@ export const getProfileByHandle = handle => dispatch => {
   // Create Profile
   export const createProfile = (profileData, history) => dispatch => {
     axios.post('/api/profile', profileData).then(res => {
-        console.log('Create Profile', res);
         history.push('/dashboard');
     }).catch(err => {
-        console.log('Error', err.response.data);
         dispatch({
             type: GET_ERRORS,
             payload: err.response.data.errors
@@ -53,7 +51,6 @@ export const getProfileByHandle = handle => dispatch => {
     axios.post('/api/profile/experience', expData).then(res => {
         history.push('/dashboard')
     }).catch(err => {
-        console.log('Error', err.response.data.errors);
         dispatch({
             type: GET_ERRORS,
             payload: err.response.data.errors
@@ -66,7 +63,6 @@ export const getProfileByHandle = handle => dispatch => {
     axios.post('/api/profile/education', eduData).then(res => {
         history.push('/dashboard')
     }).catch(err => {
-        console.log('Error', err.response.data.errors);
         dispatch({
           type: GET_ERRORS,
           payload: err.response.data.errors
@@ -79,7 +75,7 @@ export const getProfileByHandle = handle => dispatch => {
     axios.delete(`/api/profile/experience/${id}`).then(res => {
         dispatch({
           type: GET_PROFILE,
-          payload: res.data
+          payload: (res.data.data.length > 0) ? res.data.data[0] : {}
         });
     }).catch(err => {
         dispatch({
@@ -94,7 +90,7 @@ export const getProfileByHandle = handle => dispatch => {
     axios.delete(`/api/profile/education/${id}`).then(res => {
         dispatch({
           type: GET_PROFILE,
-          payload: res.data
+          payload: (res.data.data.length > 0) ? res.data.data[0] : {}
         })
     }).catch(err => {
         dispatch({
@@ -108,13 +104,11 @@ export const getProfileByHandle = handle => dispatch => {
   export const getProfiles = () => dispatch => {
     dispatch(setProfileLoading());
     axios.get('/api/profile/all').then(res => {
-        console.log('Get Profiles', res);
         dispatch({
           type: GET_PROFILES,
-          payload: res.data
+          payload: (res.data.data.length > 0) ? res.data.data : []
         })
     }).catch(err => {
-        console.log('Error', err.response.data.errors);
         dispatch({
           type: GET_PROFILES,
           payload: null

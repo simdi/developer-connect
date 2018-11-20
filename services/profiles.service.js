@@ -18,7 +18,7 @@ const router = express.Router();
     @Access: Public
     @Params: none
 */
-router.get('/:handle', (req, res) => {
+router.get('/handle/:handle', (req, res) => {
     const handle = req.params.handle;
     let errors = {};
     Profile.findOne({ handle: handle }).populate('user', ['name', 'avatar']).then(profile => {
@@ -66,7 +66,7 @@ router.get('/all', (req, res) => {
         errors.profiles = 'There are no profiles';
         if (!profiles) return res.status(404).json({ status: 404, msg: 'Error!', errors });
 
-        res.json({ status: 200, msg: 'User profiles', data: [profiles]});
+        res.json({ status: 200, msg: 'User profiles', data: profiles});
     }).catch(err => {
         errors.profile = 'There are no profiles';
         res.status(404).json({ status: 404, msg: 'Error!', errors});

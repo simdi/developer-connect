@@ -35,8 +35,8 @@ class Dashboard extends Component {
           <div>
             <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{ user.name }</Link></p>
             <ProfileActions />
-            <Experience experience={profile.experience} />
-            <Education education={profile.education} />
+            <Experience experience={(profile.experience.length > 0) ? profile.experience : []} />
+            <Education education={(profile.education.length > 0) ? profile.education : []} />
             <div style={{ marginBottom: '60px' }} />
             <button
               onClick={this.onDeleteClick.bind(this)}
