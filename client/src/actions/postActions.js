@@ -6,13 +6,11 @@ import { ADD_POST, GET_ERRORS, CLEAR_ERRORS, GET_POSTS, GET_POST, POST_LOADING, 
 export const addPost = postData => dispatch => {
   dispatch(clearErrors());
     axios.post('/api/posts', postData).then(res => {
-        console.log('REs', res);
         dispatch({
           type: ADD_POST,
-          payload: (res.data.data.length > 0) ? res.data.data : []
+          payload: (res.data.data.length > 0) ? res.data.data[0] : []
         })
     }).catch(err => {
-        console.log('Err', err);
         dispatch({
           type: GET_ERRORS,
           payload: err.response.data.errors
@@ -24,13 +22,11 @@ export const addPost = postData => dispatch => {
 export const getPosts = () => dispatch => {
   dispatch(setPostLoading());
     axios.get('/api/posts').then(res => {
-    console.log('REs', res);
         dispatch({
             type: GET_POSTS,
             payload: (res.data.data.length > 0) ? res.data.data : []
         });
     }).catch(err => {
-        console.log('Err', err);
         dispatch({
             type: GET_POSTS,
             payload: null
@@ -44,7 +40,7 @@ export const getPost = id => dispatch => {
   axios.get(`/api/posts/${id}`).then(res =>
       dispatch({
         type: GET_POST,
-        payload: res.data
+        payload: (res.data.data.length > 0) ? res.data.data[0] : []
       })
     ).catch(err =>
       dispatch({
@@ -83,7 +79,7 @@ export const addLike = id => dispatch => {
 
 // Remove Like
 export const removeLike = id => dispatch => {
-    axios.post(`/api/posts/unlike/${id}`).then(res => { 
+    axios.post(`/api/posts/like/${id}`).then(res => { 
         dispatch(getPosts())
     }).catch(err =>
         dispatch({
@@ -99,7 +95,7 @@ export const addComment = (postId, commentData) => dispatch => {
     axios.post(`/api/posts/comment/${postId}`, commentData).then(res =>
         dispatch({
         type: GET_POST,
-        payload: res.data
+        payload: (res.data.data.length > 0) ? res.data.data[0] : []
         })
     ).catch(err =>
         dispatch({
@@ -114,7 +110,7 @@ export const deleteComment = (postId, commentId) => dispatch => {
     axios.delete(`/api/posts/comment/${postId}/${commentId}`).then(res =>
         dispatch({
         type: GET_POST,
-        payload: res.data
+        payload: (res.data.data.length > 0) ? res.data.data[0] : []
         })
     ).catch(err =>
         dispatch({

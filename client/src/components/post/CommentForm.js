@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
-import { addComment } from '../../actions/postActions';
+import { addComment, addPost } from '../../actions/postActions';
 
 class CommentForm extends Component {
   constructor(props) {
@@ -74,6 +74,7 @@ class CommentForm extends Component {
 
 CommentForm.propTypes = {
   addPost: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   postId: PropTypes.string.isRequired,
   errors: PropTypes.object.isRequired
@@ -84,4 +85,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { addComment })(CommentForm);
+export default connect(mapStateToProps, { addComment, addPost })(CommentForm);
