@@ -5,14 +5,18 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const config = require('./config/default');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const routes = require('./services');
 const app = express();
+let config = require('./config/default');
+if (process.env.NODE_ENV === 'production') {
+    config = require('./config/production');
+}
 const port = process.env.PORT || config.port;
 
 // DB Configuration
+console.log('Environment', process.env.NODE_ENV);
 const db = config.mongodb;
 mongoose.connect(db, {
     useNewUrlParser: true

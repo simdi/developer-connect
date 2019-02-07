@@ -49,5 +49,5 @@
             }
         }
     },
-    "mongodb": "mongodb://localhost:27017/devconnect"
+    "mongodb": "mongodb://simdi:5Rd8BvQVBy2jdtN@ds113454.mlab.com:13454/dev-connect"
 }

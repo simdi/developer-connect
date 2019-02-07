@@ -31,7 +31,6 @@ class Login extends Component {
       password: this.state.password
     };
 
-    console.log('Login User', loginUser);
     this.props.loginUser(loginUser);
   }
 
@@ -42,7 +41,6 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('Will receive', nextProps);
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push('/dashboard');
     }
